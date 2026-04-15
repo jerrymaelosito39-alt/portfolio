@@ -1,20 +1,23 @@
 import { Switch, Route, Router as WouterRouter } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import NotFound from "@/pages/not-found";
-import Home from "@/pages/home";
 
 const queryClient = new QueryClient();
 
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={Home} />
-      <Route component={NotFound} />
+      <Route path="/" component={() => <div>Home</div>} />
+
+      <Route>
+        <div style={{ padding: 40 }}>
+          <h1>404 - Page Not Found</h1>
+        </div>
+      </Route>
     </Switch>
   );
 }
 
-function App() {
+export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
@@ -23,5 +26,3 @@ function App() {
     </QueryClientProvider>
   );
 }
-
-export default App;
